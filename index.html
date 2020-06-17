@@ -1,93 +1,45 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="utf-8">
-<link rel="icon" type="image/png" href="https://www.recur.in/drop-in/assets/images/favicon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Honey Comics</title>
-<!-- adding bootstrap.css and the needed styling -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honey Comics</title>
+    <!-- adding bootstrap.css and the needed styling -->
 <link href="https://www.recur.in/drop-in/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://www.recur.in/drop-in/assets/css/style.css" rel="stylesheet">
-<!-- adding HTML5.js -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
-<script src="https://js.chargebee.com/v2/chargebee.js" data-cb-site="honeycomics-v3-test"></script><script charset="utf-8" src="https://js.chargebee.com/v2/2-74c64f4c91dfe8743eab.js"></script><script charset="utf-8" src="https://js.chargebee.com/v2/9-d96f9e3ad75b0fe0b1d3.js"></script>
-<link rel="stylesheet" href="https://js.chargebee.com/v2/animation.css" type="text/css"></head>
+    <!-- adding HTML5.js -->
+    <script type="text/javascript" src="js/html5shiv.js"></script>
+    <script src="js/jquery-3.4.0.min.js"></script>
+    <script src="https://js.chargebee.com/v2/chargebee.js" data-cb-site="honeycomics-v3-test"></script>
+    <script src="js/app.js"></script>
+</head>
 <body>
 <div class="navbar navbar-static-top">
-  <div class="container">
-    <div class="navbar-header">          
-      <div class="h1"></div>
+    <div class="container">
+        <div class="navbar-header">
+            <div class="h1"></div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="jumbotron">
     <div class="container text-center">
-        <h2><span class="text-muted">Subscribe with a fake card and a fake address, We'll deliver our fake</span> comics <span class="text-muted">On Time!</span></h2>
-    	<h3 class="text-muted">We are working on something new, fresh and social to help you catalog<br> and manage your amazing comic collection.</h3>
-    </div>    
+        <h2><span class="text-muted">Subscribe NOW with a fake card and a fake address, We'll deliver our fake</span> comics <span class="text-muted">On Time!</span></h2>
+        <h3 class="text-muted">We are working on something new, fresh and social to help you catalog<br> and manage your amazing comic collection.</h3>
+    </div>
 </div>
 <div class="jumbotron comic-book text-center">
-	<img src="https://www.recur.in/drop-in/assets/images/comic-book.png" alt="comic book" class="center-block img-responsive">
+    <img src="images/comic-book.png" alt="comic book" class="center-block img-responsive">
 
     <a href="javascript:void(0)" class="btn btn-success btn-lg" data-cb-type="checkout" data-cb-plan-id="comics-box">subscribe</a>
-    
 </div>
 <div class="jumbotron text-center">
     <h1>Only $6/Month</h1>
     <h4 class="text-muted">Free Shipping and No hidden charges</h4><br>
-    <h4 class="h3"><span class="text-muted">The comics you love. Unlimited access. One convenient subscription.</span></h4> 
+    <h4 class="h3"><span class="text-muted">The comics you love. Unlimited access. One convenient subscription.</span></h4>
 </div>
 <div class="footer text-center">
-	<span class="text-muted">© Honey Comics. All Rights Reserved.</span>
+    <span class="text-muted">© Honey Comics. All Rights Reserved.</span>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var cbInstance = Chargebee.getInstance();
-
-      // To add addons
-      // Get the element with the corresponding plan and addons
-      var planElement = document.querySelector("[data-cb-plan-id='comics-box']");
-      var product = cbInstance.getProduct(planElement);
-      product.addons.push({id: "extra-comic-book", quantity: 2});
-
-      // to add coupon
-      product.addCoupon("cbdemo_earlybird");
-
-      // adding subscription custom fields
-      product.data["cf_sub_test"] = "subscription custom field";
-
-      // To add coupons and customer related information with custom fields
-      var cart = cbInstance.getCart();
-      // Date should be in YYYY-MM-DD
-      cart.setCustomer({email: "vivek@chargebee.com", cf_test: "customer custom field", cf_date: "1991-09-16"});
-
-      cbInstance.setCheckoutCallbacks(function(cart) {
-        // You can get the plan name for which the checkout happened like below
-        var product = cart.products[0];
-        console.log(product.planId);
-        console.log(product.addons);
-        return {
-            loaded: function() {
-                console.log("checkout opened");
-            },
-            close: function() {
-                console.log("checkout closed");
-            },
-            success: function(hostedPageId) {
-              console.log(hostedPageId);
-              // Hosted page id will be unique token for the checkout that happened
-              // You can pass this hosted page id to your backend 
-              // and then call our retrieve hosted page api to get subscription details
-              // https://apidocs.chargebee.com/docs/api/hosted_pages#retrieve_a_hosted_page
-            },
-            step: function(value) {
-                // value -> which step in checkout
-                console.log(value);
-            }
-        }
-      });
-    });
-</script>
-
-
-<div id="cb-container" style="position: fixed; right: 0px; bottom: 0px; left: 0px; top: 0px; z-index: 2147483647; display: none; overflow-y: scroll;"><div id="cb-loader" style="z-index: 99999; visibility: hidden; transition: all 0.5s ease 0s; background: rgb(244, 245, 249); position: absolute; left: 0px; right: 0px; box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 9px 0px, rgba(0, 0, 0, 0.15) 0px 20px 30px 1px, rgba(0, 0, 0, 0.15) 0px 40px 40px 1px;"><div style="overflow: hidden;"><div id="cb-loader-header" style="padding: 12px 40px; background: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; text-align: center; min-height: 64px; box-sizing: border-box;"><div style="min-height: 46px; display: flex; align-items: center; margin-top: 1px;"><img id="cb-header-logo" style="max-height: 40px; max-width: 240px; vertical-align: middle; width: auto; margin: 3px auto;"></div></div><div id="cb-loading-bar" style="height: 2px; background: rgb(72, 231, 154); transition-duration: 0.5s; transition-timing-function: ease-in-out; visibility: hidden;"></div><div style="padding: 24px 36px;"><div class="cb-placeholder" id="cb-placeholder"><div class="wavering" style="height: 20px; width: 100px; background: linear-gradient(to right, rgb(238, 238, 238) 8%, rgb(221, 221, 221) 18%, rgb(238, 238, 238) 33%) 0% 0% / 800px 104px; margin-bottom: 10px;"></div><div class="wavering" style="height: 40px; width: 200px; background: linear-gradient(to right, rgb(238, 238, 238) 8%, rgb(221, 221, 221) 18%, rgb(238, 238, 238) 33%) 0% 0% / 800px 104px; margin-bottom: 10px;"></div><div class="wavering" style="height: 10px; width: 150px; background: linear-gradient(to right, rgb(238, 238, 238) 8%, rgb(221, 221, 221) 18%, rgb(238, 238, 238) 33%) 0% 0% / 800px 104px; margin-bottom: 10px;"></div><div class="wavering" style="height: 10px; width: 150px; background: linear-gradient(to right, rgb(238, 238, 238) 8%, rgb(221, 221, 221) 18%, rgb(238, 238, 238) 33%) 0% 0% / 800px 104px; margin-bottom: 10px;"></div><div class="wavering" style="height: 10px; width: 150px; background: linear-gradient(to right, rgb(238, 238, 238) 8%, rgb(221, 221, 221) 18%, rgb(238, 238, 238) 33%) 0% 0% / 800px 104px; margin-bottom: 10px;"></div></div><div id="cb-error" style="font-size: 18px; line-height: 27px; color: rgb(248, 48, 48); text-align: center; display: none;"></div></div><div id="cb-modal-close" style="position: absolute; background: rgb(57, 57, 65); height: 24px; width: 24px; border-radius: 50%; right: -12px; top: -12px; font-size: 20px; color: rgba(255, 255, 255, 0.7); text-align: center; cursor: pointer; display: table; font-weight: 400; line-height: 24px;">×</div></div></div><iframe id="cb-frame" style="width: 100%; height: 100%; z-index: 999999; visibility: hidden; position: relative; border: 0px;"></iframe><iframe id="cb-master-frame" name="cb-master-frame" src="https://js.chargebee.com/v2/master.html#www.recur.in" style="margin: 0px; padding: 0px; border: none; overflow: hidden; display: block; min-width: 100%; width: 1px; height: 1.2em;"></iframe></div></body></html>
+</body>
+</html>
